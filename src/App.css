@@ -5,11 +5,17 @@
   justify-content: center;
   align-items: center;
   text-align: center;
+  flex-direction: column;
 }
 
 #google-map-container {
   width: 80%;
   height: 60%;
   /* box-shadow: 4px 4px 10px rgba(255, 255, 255, 0.2); */
+}
+
+#autocomplete-container {
+  padding: 2rem;
+  width: '400px'
 }
 

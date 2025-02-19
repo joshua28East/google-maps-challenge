@@ -1,6 +1,7 @@
 import { useRef } from 'react';
 import './App.css'
 import GoogleMap from './components/GoogleMap/GoogleMap'
+import Autocomplete from './components/Autocomplete/Autocomplete';
 
 function App() {
 
@@ -22,6 +23,9 @@ function App() {
 
   return (
     <div id='content'>
+      <div id='autocomplete-container'>
+        <Autocomplete />
+      </div>
       <div id='google-map-container'>
         <GoogleMap />
       </div>
