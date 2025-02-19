@@ -2,11 +2,11 @@
 ## 📌 Overview
 This coding challenge is designed to assess problem-solving skills and the ability to work with minimal guidance. The goal is to build a web application featuring:
 
-✅ An interactive Google Map
-✅ Address Autocomplete for location search
-✅ Droppable pins with fun location details
-✅ Click-to-drop pins with info-windows
-✅ A creative "wow factor" feature
+✅ An interactive Google Map<br>
+✅ Address Autocomplete for location search<br>
+✅ Droppable pins with fun location details<br>
+✅ Click-to-drop pins with info-windows<br>
+✅ A creative "wow factor" feature<br>
 
 ## 🛠️ Setup & Installation
 
