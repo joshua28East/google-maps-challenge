@@ -10,8 +10,8 @@ function App() {
   return (
     <div id="content">
       <div id="google-map-container">
-        <GoogleMap setMapInstance={setMapInstance} mapInstance={mapInstance} />
         <Autocomplete mapInstance={mapInstance} />
+        <GoogleMap setMapInstance={setMapInstance} mapInstance={mapInstance} />
       </div>
       <div>Side bar</div>
     </div>
@@ -19,4 +19,3 @@ function App() {
 }
 
 export default App
-

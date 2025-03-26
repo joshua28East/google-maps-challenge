@@ -1,11 +1,88 @@
-#pac-input {
-  max-width: 400px;
-  width: 100%;
-  margin: 10px;
+#autocomplete-container {
+  margin: 0;
+  padding: 0;
   position: absolute;
   background-color: #fff;
+  display: flex;
+  z-index: 1;
+  flex-direction: column;
+  border-radius: 16px;
+  width: 376px;
+  margin: 10px;
 }
 
-#pac-input > .input-container > input {
-  background-color: #fff;
+#autocomplete-inputs {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 14px;
+  display: flex;
 }
+
+#pac-input {
+  width: 300px;
+  border: none;
+  padding: 10px;
+  height: 24px;
+  line-height: 24px;
+}
+
+#suggestions-dialog {
+  position: relative;
+  background-color: #fff;
+  display: flex;
+  z-index: 1;
+  border: none;
+  margin: 0;
+  padding: 0;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+  flex-direction: column;
+  border-top: 1px solid #e4e4e4;
+}
+
+#suggestions-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  text-align: left;
+}
+
+.suggestion {
+  max-width: 363px;
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  padding-right: 13px;
+  padding-top: 6px;
+  padding-bottom: 7px;
+  align-content: center;
+}
+
+.suggestion:hover {
+  background-color: rgba(31, 31, 31, 0.08);
+  outline: none;
+  cursor: pointer;
+}
+
+.widget-container {
+  border: none;
+}
+
+.suggestion-main {
+  color: #1f1f1f;
+  line-height: 34px;
+}
+
+.suggestion-text {
+  font-size: 0.875rem;
+  color: #5e5e5e;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 32px;
+}
+
+.suggestion-icon {
+  padding-left: 10px;
+  padding-right: 10px;
+}
+

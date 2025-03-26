@@ -1,34 +1,94 @@
-import { useRef, useEffect } from "react"
+import { useRef, useEffect, useState } from "react"
 
 import "./Autocomplete.css"
+import Suggestion from "./Suggestion"
 
-function Autocomplete({ mapInstance }) {
-  const autocompleteRef = useRef(null)
+const getSuggestions = async (request) => {
+  try {
+    const { AutocompleteSuggestion } = await google.maps.importLibrary("places")
 
-  useEffect(() => {
-    const initAutocomplete = async () => {
-      if (!mapInstance) return
+    const { suggestions } =
+      await AutocompleteSuggestion.fetchAutocompleteSuggestions(request)
 
-      const card = document.getElementById("pac-input")
+    return suggestions
+  } catch (error) {
+    console.error(error)
+  }
+}
 
-      mapInstance.controls[google.maps.ControlPosition.TOP_LEFT].push(card)
+function Autocomplete({ mapInstance, onPlaceSelected }) {
+  const sessionToken = useRef(null)
+  const [options, setOptions] = useState([])
+  const [showOptions, setShowOptions] = useState(false)
 
-      const places = await google.maps.importLibrary("places")
-      const autocomplete = new google.maps.places.PlaceAutocompleteElement()
+  const onInputChanged = async (event) => {
+    const dialog = document.getElementById("suggestions-list")
 
-      if (!card.hasChildNodes()) {
-        card.appendChild(autocomplete)
+    if (event.target.value?.length < 3) {
+      setOptions([])
 
-        autocompleteRef.current = autocomplete
-      }
+      return
     }
 
-    initAutocomplete()
-  }, [mapInstance])
+    const inputValue = event.target.value
+
+    const request = {
+      input: inputValue,
+      language: "en-US"
+    }
+
+    const { AutocompleteSessionToken } = await google.maps.importLibrary(
+      "places"
+    )
+
+    if (!sessionToken.current) {
+      request.sessionToken = new AutocompleteSessionToken()
+    }
+
+    const suggestions = await getSuggestions(request)
+
+    setOptions(suggestions)
+    setShowOptions(true)
+  }
+
+  const onInputFocused = (event) => {
+    setShowOptions(true)
+  }
+
+  const onSelectSuggestion = (place) => {
+    const input = document.getElementById("pac-input")
+
+    input.value = place.formattedAddress
+
+    setShowOptions(false)
+    onPlaceSelected(place)
+  }
 
   return (
-    <div>
-      <div id="pac-input" />
+    <div id="autocomplete-container">
+      <div id="autocomplete-inputs">
+        <button id="sidenav-btn"></button>
+        <input
+          id="pac-input"
+          onChange={onInputChanged}
+          onFocus={onInputFocused}
+        />
+        <button id="search-btn" />
+        <button id="directions-btn" />
+      </div>
+      {showOptions ? (
+        <dialog id="suggestions-dialog">
+          <ul id="suggestions-list">
+            {options.map((suggestion, index) => (
+              <Suggestion
+                key={`suggestion-${index}`}
+                onSelect={onSelectSuggestion}
+                suggestion={suggestion.placePrediction}
+              />
+            ))}
+          </ul>
+        </dialog>
+      ) : null}
     </div>
   )
 }
